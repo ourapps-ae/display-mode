@@ -1,0 +1,14 @@
+{
+  "revision": "19905b75dbea89fbfd424d67fe26c81aaed0e018",
+  "files": [
+    {
+      "path": "web/src/mode.ts",
+      "sha256": "8ff2e59856ec9048fefabbed7650e232298e3ec24193ee043d7a708ab708e001"
+    },
+    {
+      "path": "ios/McInPoker/Sources/Platform.swift",
+      "sha256": "62612db9d39f2de5f790d593e1c791446b50e0873eb678f38bdcd81c5bef1672"
+    }
+  ],
+  "changes": "Application identities and imports replaced with configuration/callbacks; generic platform helpers extracted; tests use neutral fixtures."
+}

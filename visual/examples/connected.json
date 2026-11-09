@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "id": "display-mode-connected",
+  "title": "Display mode connected example",
+  "status": "example",
+  "view": "component",
+  "focus": "component",
+  "definitions": [
+    {
+      "id": "ourapps-ae.display-mode",
+      "name": "Display mode",
+      "kind": "component",
+      "status": "example",
+      "package": "ourapps-ae/display-mode",
+      "version": "0.4.0",
+      "ports": [
+        {
+          "id": "configuration",
+          "name": "Host configuration",
+          "direction": "input",
+          "kind": "interface",
+          "type": "ae/display-mode-configuration",
+          "version": "1.0.0",
+          "required": false,
+          "cardinality": "one"
+        },
+        {
+          "id": "facility",
+          "name": "Display mode",
+          "direction": "output",
+          "kind": "interface",
+          "type": "ae/display-policy",
+          "version": "1.0.0"
+        }
+      ],
+      "settings": []
+    },
+    {
+      "id": "configuration",
+      "name": "Example configuration",
+      "kind": "application",
+      "status": "example",
+      "revision": "0.1.0",
+      "ports": [
+        {
+          "id": "configuration",
+          "name": "Host configuration",
+          "direction": "output",
+          "kind": "interface",
+          "type": "ae/display-mode-configuration",
+          "version": "1.0.0"
+        }
+      ],
+      "settings": []
+    },
+    {
+      "id": "consumer",
+      "name": "Example consumer",
+      "kind": "application",
+      "status": "example",
+      "revision": "0.1.0",
+      "ports": [
+        {
+          "id": "facility",
+          "name": "Display mode",
+          "direction": "input",
+          "kind": "interface",
+          "type": "ae/display-policy",
+          "version": "1.0.0",
+          "required": true,
+          "cardinality": "one"
+        }
+      ],
+      "settings": []
+    }
+  ],
+  "instances": [
+    {
+      "id": "component",
+      "name": "Display mode",
+      "definition": "ourapps-ae.display-mode",
+      "configuration": {}
+    },
+    {
+      "id": "configuration",
+      "name": "Example configuration",
+      "definition": "configuration",
+      "configuration": {}
+    },
+    {
+      "id": "consumer",
+      "name": "Example consumer",
+      "definition": "consumer",
+      "configuration": {}
+    }
+  ],
+  "connections": [
+    {
+      "source": {
+        "instance": "configuration",
+        "port": "configuration"
+      },
+      "target": {
+        "instance": "component",
+        "port": "configuration"
+      }
+    },
+    {
+      "source": {
+        "instance": "component",
+        "port": "facility"
+      },
+      "target": {
+        "instance": "consumer",
+        "port": "facility"
+      }
+    }
+  ]
+}

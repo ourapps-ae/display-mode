@@ -1,0 +1,29 @@
+{
+  "id": "ourapps-ae.display-mode",
+  "name": "Display mode",
+  "kind": "component",
+  "status": "example",
+  "package": "ourapps-ae/display-mode",
+  "version": "0.4.0",
+  "ports": [
+    {
+      "id": "configuration",
+      "name": "Host configuration",
+      "direction": "input",
+      "kind": "interface",
+      "type": "ae/display-mode-configuration",
+      "version": "1.0.0",
+      "required": false,
+      "cardinality": "one"
+    },
+    {
+      "id": "facility",
+      "name": "Display mode",
+      "direction": "output",
+      "kind": "interface",
+      "type": "ae/display-policy",
+      "version": "1.0.0"
+    }
+  ],
+  "settings": []
+}

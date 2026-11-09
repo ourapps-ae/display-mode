@@ -1,0 +1,65 @@
+{
+  "id": "facility",
+  "type": "ae/display-policy",
+  "version": "1.0.0",
+  "operations": {
+    "createMode": {
+      "arguments": [
+        "initial:SessionMode",
+        "eventName:string"
+      ],
+      "returns": "{current:()=>SessionMode,publish:(next:SessionMode)=>void}"
+    },
+    "displayCapabilities": {
+      "arguments": [
+        "display:boolean"
+      ],
+      "returns": "{canAct:boolean,canCapture:boolean,canSeePrivate:boolean}"
+    },
+    "canAct": {
+      "arguments": [
+        "display:boolean"
+      ],
+      "returns": "boolean"
+    },
+    "canCapture": {
+      "arguments": [
+        "display:boolean"
+      ],
+      "returns": "boolean"
+    },
+    "canSeePrivate": {
+      "arguments": [
+        "display:boolean"
+      ],
+      "returns": "boolean"
+    }
+  },
+  "exports": {
+    "web/mode.ts": [
+      "SessionMode = \"player\" | \"board\"",
+      "createMode(initial:SessionMode,eventName:string): {current:()=>SessionMode,publish:(next:SessionMode)=>void}",
+      "displayCapabilities(display:boolean): {canAct:boolean,canCapture:boolean,canSeePrivate:boolean}"
+    ],
+    "apple/Sources/DisplayPolicy.swift": [
+      "DisplayPolicy.canAct(_ display:Bool)->Bool",
+      "DisplayPolicy.canCapture(_ display:Bool)->Bool",
+      "DisplayPolicy.canSeePrivate(_ display:Bool)->Bool"
+    ],
+    "android/src/main/java/ae/display/DisplayPolicy.kt": [
+      "ae.display.DisplayPolicy.canAct(display:Boolean):Boolean",
+      "ae.display.DisplayPolicy.canCapture(display:Boolean):Boolean",
+      "ae.display.DisplayPolicy.canSeePrivate(display:Boolean):Boolean"
+    ]
+  },
+  "requirements": {
+    "configuration": "Supply an initial mode and a nonempty event name. Persistence and authentication belong to the caller."
+  },
+  "buildInputs": "Node 26.5.0 for bundled checks; no runtime language dependencies. Swift and Kotlin sources compile in the consuming application targets.",
+  "configurationPort": {
+    "id": "configuration",
+    "type": "ae/display-mode-configuration",
+    "version": "1.0.0"
+  },
+  "lifecycle": "createMode stores initial state without publishing it. Call publish(initial) before capture. publish updates current state and document.documentElement.dataset.mode before dispatching CustomEvent(eventName,{detail:{mode}}). All capabilities are false for display=true on every platform. This policy does not authorize requests or redact server responses."
+}

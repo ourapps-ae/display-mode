@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ae/display-mode-configuration",
+  "x-version": "1.0.0",
+  "description": "The application's arguments to createMode. Persistence and authentication belong to the application.",
+  "type": "object",
+  "properties": {
+    "initial": {
+      "type": "string",
+      "enum": [
+        "player",
+        "board"
+      ],
+      "description": "The mode a session starts in."
+    },
+    "eventName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Browser event published on each mode change, for example app:mode; the same name is windows-desktop's modeEvent."
+    }
+  },
+  "required": [
+    "initial",
+    "eventName"
+  ],
+  "additionalProperties": false
+}

@@ -1,65 +1,245 @@
 {
-  "id": "facility",
-  "type": "ae/display-policy",
-  "version": "1.0.0",
-  "operations": {
-    "createMode": {
-      "arguments": [
-        "initial:SessionMode",
-        "eventName:string"
-      ],
-      "returns": "{current:()=>SessionMode,publish:(next:SessionMode)=>void}"
-    },
-    "displayCapabilities": {
-      "arguments": [
-        "display:boolean"
-      ],
-      "returns": "{canAct:boolean,canCapture:boolean,canSeePrivate:boolean}"
-    },
-    "canAct": {
-      "arguments": [
-        "display:boolean"
-      ],
-      "returns": "boolean"
-    },
-    "canCapture": {
-      "arguments": [
-        "display:boolean"
-      ],
-      "returns": "boolean"
-    },
-    "canSeePrivate": {
-      "arguments": [
-        "display:boolean"
-      ],
-      "returns": "boolean"
+  "openrpc": "1.3.2",
+  "info": {
+    "title": "ae/display-policy",
+    "version": "1.0.0",
+    "description": "Mode publication and display capability restrictions. createMode and displayCapabilities are TypeScript (web/mode.ts); DisplayPolicy.canAct, canCapture and canSeePrivate are Swift (enum DisplayPolicy) and Kotlin (object ae.display.DisplayPolicy). Every capability is false for a display on every platform. This policy does not authorize requests or redact server responses.",
+    "license": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
     }
   },
-  "exports": {
-    "web/mode.ts": [
-      "SessionMode = \"player\" | \"board\"",
-      "createMode(initial:SessionMode,eventName:string): {current:()=>SessionMode,publish:(next:SessionMode)=>void}",
-      "displayCapabilities(display:boolean): {canAct:boolean,canCapture:boolean,canSeePrivate:boolean}"
-    ],
-    "apple/Sources/DisplayPolicy.swift": [
-      "DisplayPolicy.canAct(_ display:Bool)->Bool",
-      "DisplayPolicy.canCapture(_ display:Bool)->Bool",
-      "DisplayPolicy.canSeePrivate(_ display:Bool)->Bool"
-    ],
-    "android/src/main/java/ae/display/DisplayPolicy.kt": [
-      "ae.display.DisplayPolicy.canAct(display:Boolean):Boolean",
-      "ae.display.DisplayPolicy.canCapture(display:Boolean):Boolean",
-      "ae.display.DisplayPolicy.canSeePrivate(display:Boolean):Boolean"
-    ]
-  },
-  "requirements": {
-    "configuration": "Supply an initial mode and a nonempty event name. Persistence and authentication belong to the caller."
-  },
-  "buildInputs": "Node 26.5.0 for bundled checks; no runtime language dependencies. Swift and Kotlin sources compile in the consuming application targets.",
-  "configurationPort": {
-    "id": "configuration",
-    "type": "ae/display-mode-configuration",
-    "version": "1.0.0"
-  },
-  "lifecycle": "createMode stores initial state without publishing it. Call publish(initial) before capture. publish updates current state and document.documentElement.dataset.mode before dispatching CustomEvent(eventName,{detail:{mode}}). All capabilities are false for display=true on every platform. This policy does not authorize requests or redact server responses."
+  "methods": [
+    {
+      "name": "createMode",
+      "description": "Stores the initial mode without publishing it; call publish(initial) before capture.",
+      "params": [
+        {
+          "name": "initial",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/SessionMode"
+          }
+        },
+        {
+          "name": "eventName",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Browser event published on each mode change, for example app:mode; the same name is windows-desktop's modeEvent."
+          }
+        }
+      ],
+      "result": {
+        "name": "mode",
+        "schema": {
+          "$ref": "#/components/schemas/ModeHandle"
+        }
+      },
+      "tags": [
+        {
+          "name": "typescript"
+        }
+      ]
+    },
+    {
+      "name": "ModeHandle.current",
+      "description": "The current mode.",
+      "params": [],
+      "result": {
+        "name": "mode",
+        "schema": {
+          "$ref": "#/components/schemas/SessionMode"
+        }
+      },
+      "tags": [
+        {
+          "name": "typescript"
+        }
+      ]
+    },
+    {
+      "name": "ModeHandle.publish",
+      "description": "Sets the current mode, writes it to document.documentElement.dataset.mode, then dispatches CustomEvent(eventName, {detail: {mode}}) on window.",
+      "params": [
+        {
+          "name": "next",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/SessionMode"
+          }
+        }
+      ],
+      "result": {
+        "name": "none",
+        "description": "Returns nothing.",
+        "schema": {
+          "type": "null"
+        }
+      },
+      "tags": [
+        {
+          "name": "typescript"
+        }
+      ]
+    },
+    {
+      "name": "displayCapabilities",
+      "description": "All three capabilities are the negation of display.",
+      "params": [
+        {
+          "name": "display",
+          "required": true,
+          "schema": {
+            "type": "boolean",
+            "description": "True on a shared display."
+          }
+        }
+      ],
+      "result": {
+        "name": "capabilities",
+        "schema": {
+          "$ref": "#/components/schemas/Capabilities"
+        }
+      },
+      "tags": [
+        {
+          "name": "typescript"
+        }
+      ]
+    },
+    {
+      "name": "DisplayPolicy.canAct",
+      "description": "False on a display, true otherwise.",
+      "params": [
+        {
+          "name": "display",
+          "required": true,
+          "schema": {
+            "type": "boolean",
+            "description": "True on a shared display."
+          }
+        }
+      ],
+      "result": {
+        "name": "allowed",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "tags": [
+        {
+          "name": "swift"
+        },
+        {
+          "name": "kotlin"
+        }
+      ]
+    },
+    {
+      "name": "DisplayPolicy.canCapture",
+      "description": "False on a display, true otherwise.",
+      "params": [
+        {
+          "name": "display",
+          "required": true,
+          "schema": {
+            "type": "boolean",
+            "description": "True on a shared display."
+          }
+        }
+      ],
+      "result": {
+        "name": "allowed",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "tags": [
+        {
+          "name": "swift"
+        },
+        {
+          "name": "kotlin"
+        }
+      ]
+    },
+    {
+      "name": "DisplayPolicy.canSeePrivate",
+      "description": "False on a display, true otherwise.",
+      "params": [
+        {
+          "name": "display",
+          "required": true,
+          "schema": {
+            "type": "boolean",
+            "description": "True on a shared display."
+          }
+        }
+      ],
+      "result": {
+        "name": "allowed",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "tags": [
+        {
+          "name": "swift"
+        },
+        {
+          "name": "kotlin"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "schemas": {
+      "SessionMode": {
+        "type": "string",
+        "enum": [
+          "player",
+          "board"
+        ],
+        "description": "player: a person's own device; board: a shared display."
+      },
+      "ModeHandle": {
+        "type": "object",
+        "required": [
+          "current",
+          "publish"
+        ],
+        "properties": {
+          "current": {
+            "description": "Function () => SessionMode."
+          },
+          "publish": {
+            "description": "Function (next: SessionMode) => void."
+          }
+        },
+        "additionalProperties": false
+      },
+      "Capabilities": {
+        "type": "object",
+        "properties": {
+          "canAct": {
+            "type": "boolean"
+          },
+          "canCapture": {
+            "type": "boolean"
+          },
+          "canSeePrivate": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "canAct",
+          "canCapture",
+          "canSeePrivate"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
 }

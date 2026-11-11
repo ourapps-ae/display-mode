@@ -1,6 +1,6 @@
 # Display mode instructions
 
-Package `ourapps-ae/display-mode` version `0.5.0`. It provides `facility` (type `ae/display-policy`, version 1.0.0) and optionally requires `configuration` (type `ae/display-mode-configuration`, version 1.0.0).
+Package `ourapps-ae/display-mode` version `0.5.1`. It provides `facility` (type `ae/display-policy`, version 1.0.0) and optionally requires `configuration` (type `ae/display-mode-configuration`, version 1.0.0).
 
 ## For the agent
 

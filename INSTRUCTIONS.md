@@ -22,8 +22,8 @@ Package `ourapps-ae/display-mode` version `0.5.0`. It provides `facility` (type 
 From the component directory:
 
 - `node --test tests/mode.test.mjs` (required)
-- `python3 scripts/check-native.py apple` (needs swiftc 6.4.2)
-- `python3 scripts/check-native.py android` (needs kotlinc and java 26.0.1; not runnable where kotlinc is missing)
-- `python3.12 -B tools/check_component.py components/display-mode` from the workspace root.
+- `python3 scripts/check-native.py apple` (needs swiftc 6.4)
+- `python3 scripts/check-native.py android` (needs kotlinc and java 26.0; not runnable where kotlinc is missing)
+- `python3 -m aepm review <digest> --store STORE --policy POLICY --trusted --allow-network` checks an archive fetched with `python3 -m aepm fetch ourapps-ae/display-mode@VERSION --store STORE --from https://ourapps.app` and runs its suites.
 
 In the application, switch to board mode and confirm that capture requests are refused, no private values render and the mode event fires once per change.

@@ -7,7 +7,7 @@ display-policy: Mode publication and display capability restrictions. Local-deve
 Supply an initial mode and a nonempty event name. Persistence and authentication belong to the caller.
 
 ## Artefacts and dependencies
-Every implementation file maps to components/display-mode/ with its implementation/ prefix removed. SOURCE.md records each file's frozen source and line ranges; SOURCE.json records the pinned source hashes. tools.lock.json pins the tool versions. Node 26.5.0 for bundled checks; no runtime language dependencies. Swift and Kotlin sources compile in the consuming application targets.
+Every implementation file maps to components/display-mode/ with its implementation/ prefix removed. SOURCE.md records each file's frozen source and line ranges; SOURCE.json records the pinned source hashes. tools.lock.json pins the tool versions. Node 26.5 for bundled checks; no runtime language dependencies. Swift and Kotlin sources compile in the consuming application targets.
 
 ## Provided interfaces
 interfaces/contract.json is an OpenRPC 1.3.2 document for ae/display-policy version 1.0.0: `createMode`, the returned handle's `ModeHandle.current` and `ModeHandle.publish`, and `displayCapabilities` (tagged `typescript`, web/mode.ts), and `DisplayPolicy.canAct`, `canCapture` and `canSeePrivate` (tagged `swift` and `kotlin`), with types as JSON Schema 2020-12. The visual output connector is ae/display-policy version 1.0.0.

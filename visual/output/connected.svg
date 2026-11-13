@@ -23,7 +23,7 @@
 <text xml:space="preserve" text-anchor="start" x="407.38" y="-141.25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#edf2fa">Component | Example definition</text>
 <text xml:space="preserve" text-anchor="start" x="446.75" y="-131.25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#edf2fa">Display mode</text>
 <text xml:space="preserve" text-anchor="start" x="422.38" y="-121.25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#edf2fa">ourapps&#45;ae/display&#45;mode</text>
-<text xml:space="preserve" text-anchor="start" x="428" y="-111.25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#edf2fa">Example version 0.5.1</text>
+<text xml:space="preserve" text-anchor="start" x="428" y="-111.25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#edf2fa">Example version 0.6.0</text>
 <text xml:space="preserve" text-anchor="start" x="327.75" y="-83" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#edf2fa">INPUTS</text>
 <text xml:space="preserve" text-anchor="start" x="567.25" y="-83" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#edf2fa">OUTPUTS</text>
 <polygon fill="#222b3a" stroke="none" points="321.75,-3 321.75,-73 483,-73 483,-3 321.75,-3"/>

@@ -23,5 +23,6 @@
     "initial",
     "eventName"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "x-ourapps-modules": {}
 }

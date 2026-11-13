@@ -1,7 +1,7 @@
 # Display mode
 
 ## Purpose and facilities
-display-policy: Mode publication and display capability restrictions. Local-development status; the `configuration` requirement is optional.
+display-policy: Mode publication and display capability restrictions. Local-development status; the `display-mode-configuration` requirement is optional.
 
 ## User inputs
 Supply an initial mode and a nonempty event name. Persistence and authentication belong to the caller.
@@ -10,10 +10,10 @@ Supply an initial mode and a nonempty event name. Persistence and authentication
 Every implementation file maps to components/display-mode/ with its implementation/ prefix removed. SOURCE.md records each file's frozen source and line ranges; SOURCE.json records the pinned source hashes. tools.lock.json pins the tool versions. Node 26.5 for bundled checks; no runtime language dependencies. Swift and Kotlin sources compile in the consuming application targets.
 
 ## Provided interfaces
-interfaces/contract.json is an OpenRPC 1.3.2 document for ae/display-policy version 1.0.0: `createMode`, the returned handle's `ModeHandle.current` and `ModeHandle.publish`, and `displayCapabilities` (tagged `typescript`, web/mode.ts), and `DisplayPolicy.canAct`, `canCapture` and `canSeePrivate` (tagged `swift` and `kotlin`), with types as JSON Schema 2020-12. The visual output connector is ae/display-policy version 1.0.0.
+interfaces/display-policy.json is an OpenRPC 1.3.2 document for ae/display-policy version 1.0.0: `createMode`, the returned handle's `ModeHandle.current` and `ModeHandle.publish`, and `displayCapabilities` (tagged `typescript`, web/mode.ts), and `DisplayPolicy.canAct`, `canCapture` and `canSeePrivate` (tagged `swift` and `kotlin`), with types as JSON Schema 2020-12. The visual output connector is ae/display-policy version 1.0.0.
 
 ## Required interfaces
-The `configuration` requirement is optional: the initial mode and event name can be passed in code when the application creates the policy, so a design may leave the port unconnected. The configuration input connector is ae/display-mode-configuration version 1.0.0; interfaces/required-configuration.json is the JSON Schema 2020-12 document of its fields (`initial`, `eventName`). Supply an initial mode and a nonempty event name. Persistence and authentication belong to the caller.
+The `display-mode-configuration` requirement is optional: the initial mode and event name can be passed in code when the application creates the policy, so a design may leave the port unconnected. The configuration input connector is ae/display-mode-configuration version 1.0.0; interfaces/required-display-mode-configuration.json is the JSON Schema 2020-12 document of its fields (`initial`, `eventName`). Supply an initial mode and a nonempty event name. Persistence and authentication belong to the caller.
 
 ## Integration
 See INSTRUCTIONS.md for selection and configuration and suitability.json for the library-only profile. Call createMode once per session, publish the initial mode, and read current() in capture/action callbacks. Publication updates document.documentElement.dataset.mode before dispatching CustomEvent(eventName,{detail:{mode}}). Use native helpers at action/media boundaries. The room service separately enforces authentication and private-data redaction. See examples/consumer.ts.

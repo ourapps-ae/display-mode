@@ -18,3 +18,6 @@ export function createMode(initial: SessionMode, eventName: string): {
 export function displayCapabilities(display: boolean) {
   return { canAct: !display, canCapture: !display, canSeePrivate: !display };
 }
+
+// The handle createMode returns.
+export type ModeHandle = ReturnType<typeof createMode>;

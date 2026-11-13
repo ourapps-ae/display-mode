@@ -10,4 +10,4 @@ Reference revision: `19905b75dbea89fbfd424d67fe26c81aaed0e018` (frozen McInPoker
 
 Fixtures, `examples/consumer.ts`, `scripts/check-native.py` and the tests are neutral local checks written for this component. Server-side enforcement of authentication and redaction stays with the room service.
 
-The manifest marks the `configuration` requirement `optional: true` and the visual definition draws it as not required (display-mode-configuration is a connector for values the application can also pass in code, so a design may leave it unconnected).
+The manifest marks the `display-mode-configuration` requirement `optional: true` and the visual definition draws it as not required (display-mode-configuration is a connector for values the application can also pass in code, so a design may leave it unconnected).

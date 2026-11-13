@@ -1,11 +1,11 @@
 # Display mode instructions
 
-Package `ourapps-ae/display-mode` version `0.5.1`. It provides `facility` (type `ae/display-policy`, version 1.0.0) and optionally requires `configuration` (type `ae/display-mode-configuration`, version 1.0.0).
+Package `ourapps-ae/display-mode` version `0.5.1`. It provides `display-policy` (type `ae/display-policy`, version 1.0.0) and optionally requires `display-mode-configuration` (type `ae/display-mode-configuration`, version 1.0.0).
 
 ## For the agent
 
 - Select this component when the application has a shared board or display screen that must show no private information and must not capture camera, microphone or actions (the recipe's `devices` answer includes a shared display).
-- Connect the provided `facility` port to the components that capture media or accept actions (`video-calls`, `windows-desktop`, the application's action handlers).
+- Connect the provided `display-policy` port to the components that capture media or accept actions (`video-calls`, `windows-desktop`, the application's action handlers).
 - Supply `configuration` from the recipe: an initial mode (`player` or `board`) and a nonempty event name (for example `app:mode`). Use the same event name for every consumer.
 - No accounts or keys are needed.
 

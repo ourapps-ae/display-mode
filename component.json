@@ -13,6 +13,12 @@
       "template": false
     },
     {
+      "destination": "components/display-mode/web/index.ts",
+      "executable": false,
+      "source": "implementation/web/index.ts",
+      "template": false
+    },
+    {
       "destination": "components/display-mode/web/mode.ts",
       "executable": false,
       "source": "implementation/web/mode.ts",
@@ -25,6 +31,7 @@
     "writes": [
       "components/display-mode/android/src/main/java/ae/display/DisplayPolicy.kt",
       "components/display-mode/apple/Sources/DisplayPolicy.swift",
+      "components/display-mode/web/index.ts",
       "components/display-mode/web/mode.ts"
     ]
   },
@@ -36,8 +43,8 @@
       "examples/consumer.ts"
     ],
     "interfaces": [
-      "interfaces/contract.json",
-      "interfaces/required-configuration.json",
+      "interfaces/display-policy.json",
+      "interfaces/required-display-mode-configuration.json",
       "suitability.json"
     ],
     "licenceNotice": "LICENCE"
@@ -87,15 +94,19 @@
     },
     {
       "executable": false,
+      "path": "implementation/web/index.ts"
+    },
+    {
+      "executable": false,
       "path": "implementation/web/mode.ts"
     },
     {
       "executable": false,
-      "path": "interfaces/contract.json"
+      "path": "interfaces/display-policy.json"
     },
     {
       "executable": false,
-      "path": "interfaces/required-configuration.json"
+      "path": "interfaces/required-display-mode-configuration.json"
     },
     {
       "executable": false,
@@ -170,17 +181,17 @@
   "kind": "component",
   "provides": [
     {
-      "id": "facility",
-      "path": "interfaces/contract.json",
+      "id": "display-policy",
+      "path": "interfaces/display-policy.json",
       "type": "ae/display-policy",
       "version": "1.0.0"
     }
   ],
   "requires": [
     {
-      "id": "configuration",
+      "id": "display-mode-configuration",
       "optional": true,
-      "path": "interfaces/required-configuration.json",
+      "path": "interfaces/required-display-mode-configuration.json",
       "type": "ae/display-mode-configuration",
       "version": "1.0.0"
     }
